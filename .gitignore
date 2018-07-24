@@ -32,3 +32,5 @@ msbuild.wrn
 
 # Visual Studio Code
 .vscode/
+
+*.db
