@@ -20,9 +20,7 @@ namespace Waless.API.Controllers
         {
             userForRegisterDto.Email = userForRegisterDto.Email.ToLower();
 
-            if(await _repo.UserExists(userForRegisterDto.Email)) ModelState.AddModelError("Email","Email already exists");
-
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if(await _repo.UserExists(userForRegisterDto.Email)) return BadRequest("Email already exists");
 
             var userToCreate = new Models.User
             {
