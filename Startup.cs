@@ -35,6 +35,7 @@ namespace Waless.API
                     options.AddPolicy("AllowSpecific", p => p.WithOrigins("http://localhost:4200")
                 .AllowAnyMethod()
                 .AllowAnyHeader()));
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
