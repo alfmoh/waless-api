@@ -25,6 +25,7 @@ namespace Waless.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            // throw new Exception("Sample Error");
             userForRegisterDto.Email = userForRegisterDto.Email.ToLower();
 
             if (await _repo.UserExists(userForRegisterDto.Email)) return BadRequest("Email already exists");
