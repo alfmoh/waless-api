@@ -10,5 +10,6 @@ namespace Waless.API.Dtos
         [Required]
         [StringLength(12, MinimumLength = 8, ErrorMessage = "You must specify a password between 8 and 12 characters")]
         public string Password { get; set; }
+        public string Username { get; set; }
     }
 }

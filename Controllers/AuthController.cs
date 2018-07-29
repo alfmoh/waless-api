@@ -31,7 +31,8 @@ namespace Waless.API.Controllers
 
             var userToCreate = new Models.User
             {
-                Email = userForRegisterDto.Email
+                Email = userForRegisterDto.Email,
+                Name = userForRegisterDto.Username
             };
 
             var createUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
