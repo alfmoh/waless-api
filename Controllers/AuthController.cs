@@ -37,7 +37,9 @@ namespace Waless.API.Controllers
 
             var createUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+            string tokenString = GenerateToken(createUser);
+
+            return Ok(new { tokenString });
         }
 
         [HttpPost("login")]
@@ -49,6 +51,13 @@ namespace Waless.API.Controllers
 
             //Generate Token
 
+            string tokenString = GenerateToken(userFromRepo);
+
+            return Ok(new { tokenString });
+        }
+
+        private string GenerateToken(Models.User userFromRepo)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = System.Text.Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -64,8 +73,7 @@ namespace Waless.API.Controllers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-
-            return Ok(new { tokenString });
+            return tokenString;
         }
     }
 }
