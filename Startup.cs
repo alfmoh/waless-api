@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -44,7 +45,9 @@ namespace Waless.API
                     options.AddPolicy("AllowSpecific", p => p.WithOrigins("http://localhost:4200")
                         .AllowAnyMethod()
                         .AllowAnyHeader()));
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IWalessRepository, WalessRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -56,6 +59,7 @@ namespace Waless.API
                     ValidateAudience = false
                     };
                 });
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
