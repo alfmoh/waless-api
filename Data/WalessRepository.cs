@@ -36,12 +36,22 @@ namespace Waless.API.Data
 
         public async Task<Playlist> GetPlaylist(int userId, int id)
         {
-            return await _context.Playlists.FirstOrDefaultAsync(x => x.PlaylistId == id && x.Creator.Id == userId);
+            return await _context.Playlists
+            .Include(x => x.Tracks)
+                .ThenInclude(x => x.Artist)
+            .Include(x => x.Tracks)
+                .ThenInclude(x => x.Album)
+            .FirstOrDefaultAsync(x => x.PlaylistId == id && x.Creator.Id == userId);
         }
 
         public async Task<IEnumerable<Playlist>> GetPlaylists(int userId)
         {
-            return await _context.Playlists.Include(x => x.Tracks).Where(x => x.Creator.Id == userId).ToListAsync();
+            return await _context.Playlists
+            .Include(x => x.Tracks)
+                .ThenInclude(x => x.Artist)
+            .Include(x => x.Tracks)
+                .ThenInclude(x => x.Album)
+            .Where(x => x.Creator.Id == userId).ToListAsync();
         }
 
         public void Update<T>(T entity) where T : class

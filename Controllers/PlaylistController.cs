@@ -28,8 +28,9 @@ namespace Waless.API.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
             var playlist = await _repo.GetPlaylist(userId, id);
+            var playlistToReturn = _mapper.Map<PlaylistToReturn>(playlist);
             if (playlist == null) return NotFound();
-            return Ok(playlist);
+            return Ok(playlistToReturn);
         }
 
         [HttpGet]
