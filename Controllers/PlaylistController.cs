@@ -60,5 +60,17 @@ namespace Waless.API.Controllers
 
             throw new Exception("Creating of playlist failed on save");
         }
+
+        [HttpPost("{playlistId}")]
+        public async Task<IActionResult> UpdatePlaylist(int userId, int playlistId, [FromBody] Track track)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
+            var playlist = await _repo.AddToPlaylist(userId, playlistId, track);
+
+            if (await _repo.SaveAll())
+                return CreatedAtRoute("GetPlaylist", new { id = playlist.PlaylistId }, playlist);
+
+            throw new Exception("Updating of playlist failed on save");
+        }
     }
 }

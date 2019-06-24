@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Waless.API.Helpers;
 using Waless.API.Models;
 
 namespace Waless.API.Data
@@ -37,21 +37,30 @@ namespace Waless.API.Data
         public async Task<Playlist> GetPlaylist(int userId, int id)
         {
             return await _context.Playlists
-            .Include(x => x.Tracks)
+                .Include(x => x.Tracks)
                 .ThenInclude(x => x.Artist)
-            .Include(x => x.Tracks)
+                .Include(x => x.Tracks)
                 .ThenInclude(x => x.Album)
-            .FirstOrDefaultAsync(x => x.PlaylistId == id && x.Creator.Id == userId);
+                .FirstOrDefaultAsync(x => x.PlaylistId == id && x.Creator.Id == userId);
         }
 
         public async Task<IEnumerable<Playlist>> GetPlaylists(int userId)
         {
             return await _context.Playlists
-            .Include(x => x.Tracks)
+                .Include(x => x.Tracks)
                 .ThenInclude(x => x.Artist)
-            .Include(x => x.Tracks)
+                .Include(x => x.Tracks)
                 .ThenInclude(x => x.Album)
-            .Where(x => x.Creator.Id == userId).ToListAsync();
+                .Where(x => x.Creator.Id == userId).ToListAsync();
+        }
+
+        public async Task<Playlist> AddToPlaylist(int userId, int playlistId, Track track)
+        {
+            var playlist = await GetPlaylist(userId, playlistId);
+            if (playlist == null) throw new Exception("Playlist doesn't exist");
+            if (playlist.CreatorId != userId) throw new Exception("User has no such playlist");
+            playlist.Tracks.Add(track);
+            return playlist;
         }
 
         public void Update<T>(T entity) where T : class
