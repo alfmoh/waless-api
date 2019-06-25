@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Waless.API.Migrations
 {
-    public partial class AddedPlaylist : Migration
+    public partial class AddPlaylist : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,18 +61,8 @@ namespace Waless.API.Migrations
                     PlaylistId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: true),
-                    Duration = table.Column<long>(nullable: false),
-                    Nb_tracks = table.Column<long>(nullable: false),
-                    Link = table.Column<string>(nullable: true),
-                    Picture = table.Column<string>(nullable: true),
-                    Picture_small = table.Column<string>(nullable: true),
                     Picture_medium = table.Column<string>(nullable: true),
-                    Picture_big = table.Column<string>(nullable: true),
-                    Picture_xl = table.Column<string>(nullable: true),
-                    Tracklist = table.Column<string>(nullable: true),
-                    Creation_Date = table.Column<DateTime>(nullable: false),
-                    CreatorId = table.Column<int>(nullable: false),
-                    Type = table.Column<string>(nullable: true)
+                    CreatorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

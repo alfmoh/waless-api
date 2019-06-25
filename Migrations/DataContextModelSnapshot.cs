@@ -83,31 +83,11 @@ namespace Waless.API.Migrations
                     b.Property<int>("PlaylistId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Creation_Date");
-
                     b.Property<int>("CreatorId");
-
-                    b.Property<long>("Duration");
-
-                    b.Property<string>("Link");
-
-                    b.Property<long>("Nb_tracks");
-
-                    b.Property<string>("Picture");
-
-                    b.Property<string>("Picture_big");
 
                     b.Property<string>("Picture_medium");
 
-                    b.Property<string>("Picture_small");
-
-                    b.Property<string>("Picture_xl");
-
                     b.Property<string>("Title");
-
-                    b.Property<string>("Tracklist");
-
-                    b.Property<string>("Type");
 
                     b.HasKey("PlaylistId");
 
