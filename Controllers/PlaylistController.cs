@@ -74,5 +74,17 @@ namespace Waless.API.Controllers
 
             throw new Exception("Updating of playlist failed on save");
         }
+
+        [HttpDelete("{playlistId}")]
+        public async Task<IActionResult> DeletePlaylist(int userId, int playlistId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
+            var playlist = await _repo.GetPlaylist(userId, playlistId);
+            if (playlist == null) return NotFound("Playlist not found");
+            _repo.Delete(playlist);
+            if (await _repo.SaveAll())
+                return NoContent();
+            throw new Exception("Error deleting the message");
+        }
     }
 }
