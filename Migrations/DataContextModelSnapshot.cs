@@ -85,6 +85,8 @@ namespace Waless.API.Migrations
 
                     b.Property<int>("CreatorId");
 
+                    b.Property<DateTime>("Last_updated");
+
                     b.Property<string>("Picture_medium");
 
                     b.Property<string>("Title");

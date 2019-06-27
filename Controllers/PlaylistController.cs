@@ -53,10 +53,12 @@ namespace Waless.API.Controllers
 
             var playlist = _mapper.Map<Playlist>(playlistForCreationDto);
             _repo.Add(playlist);
-            var returnPlaylist = _mapper.Map<PlaylistToReturn>(playlist);
 
             if (await _repo.SaveAll())
+            {
+                var returnPlaylist = _mapper.Map<PlaylistToReturn>(playlist);
                 return CreatedAtRoute("GetPlaylist", new { id = playlist.PlaylistId }, returnPlaylist);
+            }
 
             throw new Exception("Creating of playlist failed on save");
         }

@@ -23,7 +23,7 @@ namespace Waless.API.Models
         }
         public long Nb_tracks => Tracks.Count;
         public string Picture_medium { get; set; }
-        public DateTime Last_updated => DateTime.Now;
+        public DateTime Last_updated {get; set;}
         public User Creator { get; set; }
         public int CreatorId { get; set; }
         public string Type => "playlist";

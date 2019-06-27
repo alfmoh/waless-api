@@ -6,6 +6,7 @@ namespace Waless.API.Dtos
 {
     public class PlaylistToReturn
     {
+        public int PlaylistId { get; set; }
         public string Title { get; set; }
         public long Duration { get; set; }
         public long Nb_tracks { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Waless.API.Migrations
 {
@@ -62,6 +63,7 @@ namespace Waless.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: true),
                     Picture_medium = table.Column<string>(nullable: true),
+                    Last_updated = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

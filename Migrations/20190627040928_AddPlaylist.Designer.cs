@@ -9,7 +9,7 @@ using Waless.API.Data;
 namespace Waless.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190625195811_AddPlaylist")]
+    [Migration("20190627040928_AddPlaylist")]
     partial class AddPlaylist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,8 @@ namespace Waless.API.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CreatorId");
+
+                    b.Property<DateTime>("Last_updated");
 
                     b.Property<string>("Picture_medium");
 
