@@ -68,6 +68,7 @@ namespace Waless.API.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
             var playlist = await _repo.AddToPlaylist(userId, playlistId, track);
+            playlist.Last_updated = DateTime.Now;
 
             if (await _repo.SaveAll())
                 return CreatedAtRoute("GetPlaylist", new { id = playlist.PlaylistId }, playlist);

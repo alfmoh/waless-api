@@ -45,6 +45,7 @@ namespace Waless.API
                     options.AddPolicy("AllowSpecific", p => p.WithOrigins("http://localhost:4200")
                         .AllowAnyMethod()
                         .AllowAnyHeader()));
+            // services.AddCors();
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IWalessRepository, WalessRepository>();
@@ -86,6 +87,8 @@ namespace Waless.API
             }
 
             app.UseCors("AllowSpecific");
+            // app.UseCors
+            // (x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
 
             // app.UseHttpsRedirection();

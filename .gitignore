@@ -32,5 +32,7 @@ msbuild.wrn
 
 # Visual Studio Code
 .vscode/
+.vs/
 
 *.db
+*.sqlite
