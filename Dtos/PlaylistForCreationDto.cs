@@ -10,6 +10,6 @@ namespace Waless.API.Dtos
         public string Picture_medium { get; set; }
         public int CreatorId { get; set; }
         public DateTime Last_updated => DateTime.Now;
-        public ICollection<Track> Tracks { get; set; }
+        public ICollection<TrackForCreation> Tracks { get; set; }
     }
 }

@@ -64,9 +64,10 @@ namespace Waless.API.Controllers
         }
 
         [HttpPost("{playlistId}")]
-        public async Task<IActionResult> UpdatePlaylist(int userId, int playlistId, [FromBody] Track track)
+        public async Task<IActionResult> UpdatePlaylist(int userId, int playlistId, [FromBody] TrackForCreation trackForCreation)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
+            var track = _mapper.Map<Track>(trackForCreation);
             var playlist = await _repo.AddToPlaylist(userId, playlistId, track);
             playlist.Last_updated = DateTime.Now;
 

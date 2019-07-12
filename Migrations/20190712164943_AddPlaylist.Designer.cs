@@ -9,7 +9,7 @@ using Waless.API.Data;
 namespace Waless.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190627040928_AddPlaylist")]
+    [Migration("20190712164943_AddPlaylist")]
     partial class AddPlaylist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

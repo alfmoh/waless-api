@@ -9,6 +9,9 @@ namespace Waless.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<PlaylistForCreationDto, Playlist>();
+            CreateMap<TrackForCreation, Track>();
+            CreateMap<AlbumForCreation, Album>();
+            CreateMap<ArtistForCreation, Artist>();
             CreateMap<Playlist, PlaylistToReturn>();
         }
     }
